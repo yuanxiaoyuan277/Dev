@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.StudentDao">
+    <sql id="Student_Field">
+        id,name, age,gender,birthday,info
+    </sql>
+
+    <select id="findById" resultType="com.fc.entity.Student">
+        select <include refid="Student_Field"></include>
+        from student
+        <where>
+            <if test="id != null">
+                or id = #{id}
+            </if>
+            <if test="name != null">
+                or name = #{name}
+            </if>
+
+            <if test="age != null">
+                or age = #{age}
+            </if>
+
+            <if test="gender != null">
+                or gender = #{gender}
+            </if>
+
+            <if test="birthday != null">
+                or birthday = #{birthday}
+            </if>
+
+            <if test="info != null">
+                or info = #{info}
+            </if>
+        </where>
+    </select>
+</mapper>
