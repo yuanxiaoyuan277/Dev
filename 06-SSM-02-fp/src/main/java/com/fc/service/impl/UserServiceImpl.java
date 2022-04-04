@@ -3,11 +3,14 @@ package com.fc.service.impl;
 import com.fc.dao.UserMapper;
 import com.fc.entity.User;
 import com.fc.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends PageHelper implements UserService {
     @Autowired
     private UserMapper userMapper;
 
@@ -24,6 +27,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int update(User user) {
         return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public ArrayList<User> findAll(Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        return (ArrayList<User>) userMapper.selectByExample(null);
     }
 
 }

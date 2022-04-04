@@ -2,13 +2,14 @@ package com.fc.controller;
 
 import com.fc.entity.User;
 import com.fc.service.UserService;
-import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,10 +19,9 @@ public class user {
     private UserService userService;
     //用户删除
     @RequestMapping("del")
-    public Map<String,Object> del(String id){
+    public Map<String,Object> del(Integer id){
         Map<String, Object> map = new HashMap<>();
-        long ids = Long.parseLong(id);
-        int affectedRows = userService.del(ids);
+        int affectedRows = userService.del((long)id);
         if (affectedRows == 0){
             map.put("message","用户删除失败！");
             map.put("code",404);
@@ -59,12 +59,42 @@ public class user {
     }
     //用户获取
     @RequestMapping("list")
-    public List<User> list(Integer id){
-        // 一行代码搞定，需要声明当前页和每页显示多少条数据
-        PageHelper.startPage(100000, 2);
+    public Map<String,Object> list(@RequestParam(value = "pageNo",required = false, defaultValue = "1")Integer pageNo
+            ,@RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
+            ,@RequestParam(value = "id", required = false, defaultValue = "-1") Integer id){
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> date = new HashMap<>();
 
-//        List<User> user = UserDao.findAll();
-        return null;
+        ArrayList<User> users = new ArrayList<>();
+        User user;
+        if (id !=-1){
+            user = userService.findById((long)id);
+            if (user != null) {
+                users.add(user);
+            }
+        }else {
+            users = userService.findAll(pageNo,pageSize);
+        }
+        PageInfo<User> info = new PageInfo<>(users);
+
+
+        if (users.isEmpty()){
+            map.put("message","KO！");
+            map.put("code",404);
+            map.put("success",false);
+            map.put("date",date);
+        }else {
+            map.put("message","OK！");
+            map.put("code",200);
+            map.put("success",true);
+
+            date.put("total",info.getTotal());
+            date.put("list",users);
+            date.put("pageNum",pageNo);
+            date.put("pageSize",pageSize);
+            map.put("date",date);
+        }
+        return map;
     }
     //用户添加
     @RequestMapping("add")
