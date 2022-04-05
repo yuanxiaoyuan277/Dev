@@ -15,4 +15,14 @@ public class CarouselServiceImpl implements CarouselService {
     public int add(Carousel carousel, Boolean is_carousel) {
         return carouselMapper.insertSelective(carousel);
     }
+
+    @Override
+    public int del(Integer id) {
+       return carouselMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int update(Carousel carousel) {
+        return carouselMapper.updateByPrimaryKey(carousel);
+    }
 }
