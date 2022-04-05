@@ -21,7 +21,7 @@ public class user {
     @RequestMapping("del")
     public Map<String,Object> del(Integer id){
         Map<String, Object> map = new HashMap<>();
-        int affectedRows = userService.del((long)id);
+        int affectedRows = userService.del(id);
         if (affectedRows == 0){
             map.put("message","用户删除失败！");
             map.put("code",404);
@@ -68,7 +68,7 @@ public class user {
         ArrayList<User> users = new ArrayList<>();
         User user;
         if (id !=-1){
-            user = userService.findById((long)id);
+            user = userService.findById(id);
             if (user != null) {
                 users.add(user);
             }

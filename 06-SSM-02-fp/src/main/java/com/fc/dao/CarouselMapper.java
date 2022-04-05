@@ -2,9 +2,8 @@ package com.fc.dao;
 
 import com.fc.entity.Carousel;
 import com.fc.entity.CarouselExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CarouselMapper {
     long countByExample(CarouselExample example);

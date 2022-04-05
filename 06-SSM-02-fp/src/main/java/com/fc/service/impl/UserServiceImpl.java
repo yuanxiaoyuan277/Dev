@@ -15,7 +15,7 @@ public class UserServiceImpl extends PageHelper implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int del(long id) {
+    public int del(Integer id) {
         return userMapper.deleteByPrimaryKey(id);
     }
 
@@ -30,7 +30,7 @@ public class UserServiceImpl extends PageHelper implements UserService {
     }
 
     @Override
-    public User findById(Long id) {
+    public User findById(Integer id) {
         return userMapper.selectByPrimaryKey(id);
     }
 

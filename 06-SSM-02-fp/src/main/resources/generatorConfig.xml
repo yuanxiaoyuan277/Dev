@@ -49,6 +49,7 @@
         <table schema="" tableName="collection"/>
         <table schema="" tableName="message_board"/>
         <table schema="" tableName="poor"/>
+        <table schema="" tableName="carousel"/>
         <table schema="" tableName="user"/>
         <table schema="" tableName="volunteer_recruitment"/>
 
