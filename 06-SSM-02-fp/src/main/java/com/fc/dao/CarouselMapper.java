@@ -2,15 +2,16 @@ package com.fc.dao;
 
 import com.fc.entity.Carousel;
 import com.fc.entity.CarouselExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CarouselMapper {
     long countByExample(CarouselExample example);
 
     int deleteByExample(CarouselExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(Carousel record);
 
@@ -27,4 +28,6 @@ public interface CarouselMapper {
     int updateByPrimaryKeySelective(Carousel record);
 
     int updateByPrimaryKey(Carousel record);
+
+    int updateStatus(@Param("id") Integer id);
 }

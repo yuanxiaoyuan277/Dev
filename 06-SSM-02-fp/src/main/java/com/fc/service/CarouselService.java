@@ -1,11 +1,16 @@
 package com.fc.service;
 
 import com.fc.entity.Carousel;
+import com.fc.vo.ResultVO;
 
 public interface CarouselService {
-    int add(Carousel carousel, Boolean is_carousel);
+    ResultVO add(Carousel carousel, Boolean is_carousel);
 
-    int del(Integer id);
+    ResultVO del(Long id);
 
-    int update(Carousel carousel);
+    ResultVO update(Carousel carousel);
+
+    ResultVO getList(Integer pageNum, Integer pageSize, Integer id);
+
+    ResultVO changeStatus(Integer id);
 }

@@ -1,19 +1,16 @@
 package com.fc.service;
 
 import com.fc.entity.User;
+import com.fc.vo.ResultVO;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public interface UserService{
-    int del(Integer id);
+    ResultVO del(Long id);
 
-    int add(User user);
+    ResultVO add(User user);
 
-    int update(User user);
+    ResultVO update(User user);
 
-    User findById(Integer id);
-
-    ArrayList<User> findAll(Integer pageNo, Integer pageSize);
+    ResultVO getList(Integer pageNum, Integer pageSize, Long id);
 }

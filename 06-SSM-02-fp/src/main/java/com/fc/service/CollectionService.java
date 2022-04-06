@@ -1,15 +1,12 @@
 package com.fc.service;
 
 import com.fc.entity.Collection;
-
-import java.util.ArrayList;
+import com.fc.vo.ResultVO;
 
 public interface CollectionService {
-    int add(Collection collection);
+    ResultVO add(Collection collection);
 
-    int del(Long id);
+    ResultVO del(Long id);
 
-    Collection findById(long userid);
-
-    ArrayList<Collection> findAll(Integer pageNo, Integer pageSize);
+    ResultVO getList(Integer pageNum, Integer pageSize, Long userid);
 }
