@@ -148,7 +148,7 @@
       #{clickNum,jdbcType=INTEGER}, #{condition,jdbcType=LONGVARCHAR}, #{introduce,jdbcType=LONGVARCHAR}, 
       #{reply,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.fc.entity.PoorWithBLOBs">
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.fc.entity.PoorWithBLOBs">
     insert into poor
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

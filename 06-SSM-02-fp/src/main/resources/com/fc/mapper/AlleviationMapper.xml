@@ -136,7 +136,7 @@
       #{lastClickTime,jdbcType=TIMESTAMP}, #{clickNum,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fc.entity.Alleviation">
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.fc.entity.Alleviation">
     insert into alleviation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
