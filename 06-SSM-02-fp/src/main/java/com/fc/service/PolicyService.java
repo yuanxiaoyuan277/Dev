@@ -1,14 +1,18 @@
 package com.fc.service;
 
-import com.fc.entity.PoorWithBLOBs;
+import com.fc.entity.Alleviation;
 import com.fc.vo.ResultVO;
 
+import java.util.Date;
+
 public interface PolicyService {
-    ResultVO add(PoorWithBLOBs poorWithBLOBs);
+    ResultVO add(Alleviation alleviation);
 
     ResultVO del(Long id);
 
-    ResultVO update(PoorWithBLOBs poorWithBLOBs);
+    ResultVO update(Alleviation alleviation);
 
     ResultVO getList(Integer pageNum, Integer pageSize);
+
+    ResultVO click(Long id, Date lastClickTime);
 }

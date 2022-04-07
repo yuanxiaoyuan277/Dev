@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -63,8 +64,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         ResultVO resultVO;
 
         try {
-
-                PageHelper.startPage(pageNum,pageSize);
+            PageHelper.startPage(pageNum,pageSize);
 
             volunteerRecruitments = volunteerRecruitmentMapper.selectByExample(null);
 
@@ -74,6 +74,21 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
             resultVO = new ResultVO(200,"OK",true,dataVO);
 
+        }catch (Exception e){
+            resultVO = new ResultVO(-10000,"fail",false,null);
+        }
+        return resultVO;
+    }
+
+    @Override
+    public ResultVO click(Long id, Date lastClickTime) {
+        ResultVO resultVO;
+        try {
+            VolunteerRecruitment volunteerRecruitment = volunteerRecruitmentMapper.selectByPrimaryKey(id);
+            volunteerRecruitment.setCreateTime(lastClickTime);
+            volunteerRecruitment.setClickNum(volunteerRecruitment.getClickNum()+1);
+
+            resultVO = new ResultVO(200, "OK", true, null);
         }catch (Exception e){
             resultVO = new ResultVO(-10000,"fail",false,null);
         }

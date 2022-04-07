@@ -3,8 +3,9 @@ package com.fc.dao;
 import com.fc.entity.MessageBoard;
 import com.fc.entity.MessageBoardExample;
 import com.fc.entity.MessageBoardWithBLOBs;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MessageBoardMapper {
     long countByExample(MessageBoardExample example);
@@ -22,6 +23,8 @@ public interface MessageBoardMapper {
     List<MessageBoard> selectByExample(MessageBoardExample example);
 
     MessageBoardWithBLOBs selectByPrimaryKey(Long id);
+
+    MessageBoardWithBLOBs selectByUserId(@Param("userId") Long userId);
 
     int updateByExampleSelective(@Param("record") MessageBoardWithBLOBs record, @Param("example") MessageBoardExample example);
 

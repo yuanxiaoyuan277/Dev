@@ -115,6 +115,14 @@
     from message_board
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_board
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from message_board
     where id = #{id,jdbcType=BIGINT}
