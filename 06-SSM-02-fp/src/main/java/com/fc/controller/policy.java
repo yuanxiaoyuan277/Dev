@@ -4,13 +4,10 @@ import com.fc.entity.Alleviation;
 import com.fc.service.PolicyService;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("policy")
+@RequestMapping("alleviation")
 public class policy {
     @Autowired
     private PolicyService policyService;
@@ -20,7 +17,7 @@ public class policy {
         return policyService.add(alleviation);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVO del(Long id){
         return policyService.del(id);
     }
@@ -30,7 +27,7 @@ public class policy {
         return policyService.update(alleviation);
     }
 
-    @RequestMapping("getList")
+    @RequestMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
                             @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize){
         return policyService.getList(pageNum,pageSize);

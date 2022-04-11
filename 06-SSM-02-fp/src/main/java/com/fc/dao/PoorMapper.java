@@ -5,6 +5,7 @@ import com.fc.entity.PoorExample;
 import com.fc.entity.PoorWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PoorMapper {
@@ -37,4 +38,6 @@ public interface PoorMapper {
     int updateByPrimaryKey(Poor record);
 
     Poor selectByUsername(@Param("name") String name);
+
+    Integer click(@Param(("id")) Long id,@Param("lastClickTime") Date lastClickTime);
 }

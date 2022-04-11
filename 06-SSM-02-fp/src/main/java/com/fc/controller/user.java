@@ -1,6 +1,6 @@
 package com.fc.controller;
 
-import com.fc.entity.User;
+import com.fc.entity.UserWithBLOBs;
 import com.fc.service.UserService;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,17 @@ public class user {
     @Autowired
     private UserService userService;
     //用户删除
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVO del(Long id){
         return userService.del(id);
     }
     //用户修改
     @RequestMapping("update")
-    public ResultVO update(@RequestBody User user){
+    public ResultVO update(@RequestBody UserWithBLOBs user){
             return userService.update(user);
     }
     //用户获取
-    @RequestMapping("list")
+    @RequestMapping("getlist")
     public ResultVO list(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum
                         , @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
                         , Long id){
@@ -34,7 +34,7 @@ public class user {
     }
     //用户添加
     @RequestMapping("add")
-    public ResultVO add (@RequestBody User user){
+    public ResultVO add (@RequestBody UserWithBLOBs user){
             return userService.add(user);
     }
 }

@@ -4,15 +4,12 @@ import com.fc.entity.VolunteerRecruitment;
 import com.fc.service.RecruitmentService;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
 @RestController
-@RequestMapping("recruitment")
+@RequestMapping("volunteer")
 public class recruitment {
     @Autowired
     private RecruitmentService recruitmentService;
@@ -22,7 +19,7 @@ public class recruitment {
         return recruitmentService.add(volunteerRecruitment);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVO del(Long id){
         return recruitmentService.del(id);
     }
@@ -31,7 +28,7 @@ public class recruitment {
     public ResultVO update(@RequestBody VolunteerRecruitment volunteerRecruitment){
         return recruitmentService.update(volunteerRecruitment);
     }
-    @RequestMapping("getList")
+    @RequestMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
                             @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize){
         return recruitmentService.getList(pageNum,pageSize);

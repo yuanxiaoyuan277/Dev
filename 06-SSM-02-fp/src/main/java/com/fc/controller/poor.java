@@ -1,6 +1,5 @@
 package com.fc.controller;
 
-import com.fc.entity.Poor;
 import com.fc.entity.PoorWithBLOBs;
 import com.fc.service.PoorService;
 import com.fc.vo.ResultVO;
@@ -21,7 +20,7 @@ public class poor {
         return poorService.add(poorWithBLOBs);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVO del(Long id){
         return poorService.del(id);
     }
@@ -31,10 +30,15 @@ public class poor {
         return poorService.update(poorWithBLOBs);
     }
 
-    @RequestMapping("getList")
+    @RequestMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
                             @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize,
-                            Poor poor){
-        return poorService.getList(pageNum,pageSize,poor.getUsername());
+                            PoorWithBLOBs poor){
+        return poorService.getList(pageNum,pageSize,poor);
+    }
+
+    @RequestMapping("click")
+    public ResultVO click(@RequestBody PoorWithBLOBs poorWithBLOBs){
+        return poorService.click(poorWithBLOBs.getId(),poorWithBLOBs.getLastClickTime());
     }
 }

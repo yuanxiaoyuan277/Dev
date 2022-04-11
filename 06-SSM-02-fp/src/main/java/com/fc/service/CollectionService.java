@@ -9,4 +9,6 @@ public interface CollectionService {
     ResultVO del(Long id);
 
     ResultVO getList(Integer pageNum, Integer pageSize, Long userid);
+
+    ResultVO update(Collection collection);
 }

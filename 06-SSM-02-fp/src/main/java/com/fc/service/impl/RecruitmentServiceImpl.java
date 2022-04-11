@@ -83,14 +83,15 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Override
     public ResultVO click(Long id, Date lastClickTime) {
         ResultVO resultVO;
-        try {
-            VolunteerRecruitment volunteerRecruitment = volunteerRecruitmentMapper.selectByPrimaryKey(id);
-            volunteerRecruitment.setCreateTime(lastClickTime);
-            volunteerRecruitment.setClickNum(volunteerRecruitment.getClickNum()+1);
+        if (lastClickTime == null){
+            lastClickTime = new Date();
+        }
+        Integer i = volunteerRecruitmentMapper.click(id, lastClickTime);
 
+        if (i > 0){
             resultVO = new ResultVO(200, "OK", true, null);
-        }catch (Exception e){
-            resultVO = new ResultVO(-10000,"fail",false,null);
+        }else {
+            resultVO = new ResultVO(-1000, "fail", false, null);
         }
         return resultVO;
     }

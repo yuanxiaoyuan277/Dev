@@ -2,8 +2,10 @@ package com.fc.dao;
 
 import com.fc.entity.VolunteerRecruitment;
 import com.fc.entity.VolunteerRecruitmentExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface VolunteerRecruitmentMapper {
     long countByExample(VolunteerRecruitmentExample example);
@@ -33,4 +35,6 @@ public interface VolunteerRecruitmentMapper {
     int updateByPrimaryKeyWithBLOBs(VolunteerRecruitment record);
 
     int updateByPrimaryKey(VolunteerRecruitment record);
+
+    Integer click(@Param(("id")) Long id,@Param("lastClickTime") Date lastClickTime);
 }

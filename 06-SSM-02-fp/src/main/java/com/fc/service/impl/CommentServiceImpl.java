@@ -64,24 +64,23 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize, Long userId) {
-        List<MessageBoard> messageBoards;
+    public ResultVO getList(Integer pageNum, Integer pageSize,Long userId) {
+        List<MessageBoardWithBLOBs> messageBoards;
         ResultVO resultVO;
         try {
             if (userId == null){
                 PageHelper.startPage(pageNum,pageSize);
 
-                messageBoards = messageBoardMapper.selectByExample(null);
+                messageBoards = messageBoardMapper.selectByExampleWithBLOBs(null);
             }else {
-                MessageBoard messageBoard = messageBoardMapper.selectByUserId(userId);
+                MessageBoardWithBLOBs messageBoardWithBLOBs = messageBoardMapper.selectByUserId(userId);
                 messageBoards = new ArrayList<>();
-                messageBoards.add(messageBoard);
-
+                messageBoards.add(messageBoardWithBLOBs);
 
             }
-            PageInfo<MessageBoard> pageInfo = new PageInfo<>(messageBoards);
+            PageInfo<MessageBoardWithBLOBs> pageInfo = new PageInfo<>(messageBoards);
 
-            DataVO<MessageBoard> dataVO = new DataVO<>(pageInfo.getTotal(),messageBoards,pageNum,pageSize);
+            DataVO<MessageBoardWithBLOBs> dataVO = new DataVO<>(pageInfo.getTotal(),messageBoards,pageNum,pageSize);
 
             resultVO = new ResultVO(200,"OK",true,dataVO);
 

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fc.dao.PoorMapper">
+  <update id="click">
+    update alleviation
+    set click_num = click_num + 1,
+        last_click_time = #{lastClickTime}
+    where id = #{id}
+  </update>
   <select id="selectByUsername">
     select
     <include refid="Base_Column_List" />
@@ -199,7 +205,7 @@
         click_num,
       </if>
       <if test="condition != null">
-        condition,
+        `condition`,
       </if>
       <if test="introduce != null">
         introduce,

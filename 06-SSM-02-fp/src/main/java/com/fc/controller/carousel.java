@@ -4,10 +4,7 @@ import com.fc.entity.Carousel;
 import com.fc.service.CarouselService;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("carousel")
@@ -20,7 +17,7 @@ public class carousel {
         return carouselService.add(carousel,is_carousel);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVO del(Long id){
         return carouselService.del(id);
     }
@@ -29,7 +26,7 @@ public class carousel {
     public ResultVO update(@RequestBody Carousel carousel){
         return carouselService.update(carousel);
     }
-    @RequestMapping("getList")
+    @RequestMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum
             , @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
             , Integer id){

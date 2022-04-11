@@ -51,7 +51,7 @@ public class PoorServiceImpl implements PoorService {
     @Override
     public ResultVO update(PoorWithBLOBs poorWithBLOBs) {
         ResultVO resultVO;
-        int i = poorMapper.updateByPrimaryKey(poorWithBLOBs);
+        int i = poorMapper.updateByPrimaryKeySelective(poorWithBLOBs);
 
         if (i > 0){
             PoorWithBLOBs result = poorMapper.selectByPrimaryKey(poorWithBLOBs.getId());
@@ -65,27 +65,44 @@ public class PoorServiceImpl implements PoorService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize, String username) {
-        List<Poor> poors;
+    public ResultVO getList(Integer pageNum, Integer pageSize,PoorWithBLOBs poorWithBLOBs) {
+        List<PoorWithBLOBs> poor;
         ResultVO resultVO;
         try {
-            if (username == null){
+            if (poorWithBLOBs.getId() == null){
                 PageHelper.startPage(pageNum,pageSize);
 
-                poors = poorMapper.selectByExample(null);
+                poor = poorMapper.selectByExampleWithBLOBs(null);
             }else {
-                Poor poor = poorMapper.selectByUsername(username);
-                poors = new ArrayList<>();
-                poors.add(poor);
+                Poor poor1 = poorMapper.selectByPrimaryKey(poorWithBLOBs.getId());
+                poor = new ArrayList<>();
+                poor.add(poorWithBLOBs);
+                poor1.setClickNum(poor1.getClickNum()+1);
             }
-            PageInfo<Poor> pageInfo = new PageInfo<>(poors);
+            PageInfo<PoorWithBLOBs> pageInfo = new PageInfo<>(poor);
 
-            DataVO<Poor> dataVO = new DataVO<>(pageInfo.getTotal(),poors,pageNum,pageSize);
+            DataVO<PoorWithBLOBs> dataVO = new DataVO<>(pageInfo.getTotal(),poor,pageNum,pageSize);
 
             resultVO = new ResultVO(200,"OK",true,dataVO);
 
         }catch (Exception e){
             resultVO = new ResultVO(-10000,"fail",false,null);
+        }
+        return resultVO;
+    }
+
+    @Override
+    public ResultVO click(Long id, Date lastClickTime) {
+        ResultVO resultVO;
+        if (lastClickTime == null){
+            lastClickTime = new Date();
+        }
+        Integer i = poorMapper.click(id, lastClickTime);
+
+        if (i > 0){
+            resultVO = new ResultVO(200, "OK", true, null);
+        }else {
+            resultVO = new ResultVO(-1000, "fail", false, null);
         }
         return resultVO;
     }

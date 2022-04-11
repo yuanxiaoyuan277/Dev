@@ -74,4 +74,20 @@ public class CollectionServiceImpl extends PageHelper implements CollectionServi
         return resultVO;
     }
 
+    @Override
+    public ResultVO update(Collection collection) {
+        ResultVO resultVO;
+        int i = collectionMapper.updateByPrimaryKey(collection);
+
+        if (i > 0){
+            Collection result = collectionMapper.selectByPrimaryKey(collection.getId());
+
+            resultVO = new ResultVO(200, "OK", true, result);
+        }else {
+            resultVO = new ResultVO(-1000, "fail", false, null);
+        }
+
+        return resultVO;
+    }
+
 }

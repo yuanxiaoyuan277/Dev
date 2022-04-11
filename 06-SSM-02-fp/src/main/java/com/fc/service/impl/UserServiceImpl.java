@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.UserMapper;
 import com.fc.entity.User;
+import com.fc.entity.UserWithBLOBs;
 import com.fc.service.UserService;
 import com.fc.vo.DataVO;
 import com.fc.vo.ResultVO;
@@ -32,7 +33,7 @@ public class UserServiceImpl extends PageHelper implements UserService {
     }
 
     @Override
-    public ResultVO add(User user) {
+    public ResultVO add(UserWithBLOBs user) {
         if (user.getCreateTime() == null){
             user.setCreateTime(new Date());
         }
@@ -48,7 +49,7 @@ public class UserServiceImpl extends PageHelper implements UserService {
     }
 
     @Override
-    public ResultVO update(User user) {
+    public ResultVO update(UserWithBLOBs user) {
         ResultVO resultVO;
         int i = userMapper.updateByPrimaryKey(user);
 
