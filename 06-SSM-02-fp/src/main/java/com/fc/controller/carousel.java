@@ -18,7 +18,7 @@ public class carousel {
     }
 
     @RequestMapping("delete")
-    public ResultVO del(Long id){
+    public ResultVO del(Integer id){
         return carouselService.del(id);
     }
 
@@ -26,12 +26,14 @@ public class carousel {
     public ResultVO update(@RequestBody Carousel carousel){
         return carouselService.update(carousel);
     }
-    @RequestMapping("getlist")
-    public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum
-            , @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
-            , Integer id){
+
+    @RequestMapping("getList")
+    public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
+                            @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize,
+                            Integer id){
         return carouselService.getList(pageNum,pageSize,id);
     }
+
     @RequestMapping("state")
     public ResultVO changeState(Integer id){
         return carouselService.changeStatus(id);

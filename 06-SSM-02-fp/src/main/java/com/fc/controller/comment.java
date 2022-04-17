@@ -26,11 +26,11 @@ public class comment {
     public ResultVO update(@RequestBody MessageBoardWithBLOBs messageBoards){
         return commentService.update(messageBoards);
     }
-    @RequestMapping("getlist")
+    @RequestMapping("getList")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum
             , @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
-            , Long userId){
-        return commentService.getList(pageNum,pageSize,userId);
+            , String username){
+        return commentService.getList(pageNum,pageSize,username);
     }
 
 }

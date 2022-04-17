@@ -30,7 +30,7 @@ public class poor {
         return poorService.update(poorWithBLOBs);
     }
 
-    @RequestMapping("getlist")
+    @RequestMapping("getList")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
                             @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize,
                             PoorWithBLOBs poor){

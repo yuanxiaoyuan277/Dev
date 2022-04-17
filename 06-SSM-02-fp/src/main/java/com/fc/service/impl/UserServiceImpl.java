@@ -11,7 +11,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,19 +64,24 @@ public class UserServiceImpl extends PageHelper implements UserService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize, Long id) {
-        List<User> users;
+    public ResultVO getList(Integer pageNum, Integer pageSize,String info ,String search) {
+        List<User> users = null;
         ResultVO resultVO;
         try {
-            if (id == null){
+            if (search.equals("")){
                 PageHelper.startPage(pageNum,pageSize);
 
                 users = userMapper.selectByExample(null);
             }else {
-                User user = userMapper.selectByPrimaryKey(id);
-                users = new ArrayList<>();
-                users.add(user);
+                if(info.equals("zhanghao")){
+                    users = userMapper.selectByUserName("%"+search+"%");
+                }
+                if (info.equals("xingming")){
+                    users = userMapper.selectByName("%"+search+"%");
+                }
+
             }
+            assert users != null;
             PageInfo<User> pageInfo = new PageInfo<>(users);
 
             DataVO<User> dataVO = new DataVO<>(pageInfo.getTotal(),users,pageNum,pageSize);

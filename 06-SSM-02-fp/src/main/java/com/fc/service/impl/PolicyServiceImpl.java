@@ -65,15 +65,18 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize) {
+    public ResultVO getList(Integer pageNum, Integer pageSize,Alleviation alleviation) {
         List<Alleviation> alleviations;
         ResultVO resultVO;
 
         try {
-            PageHelper.startPage(pageNum,pageSize);
+            if (alleviation.getType().equals("")){
+                PageHelper.startPage(pageNum,pageSize);
 
-            alleviations = alleviationMapper.selectByExample(null);
-
+                alleviations = alleviationMapper.selectByExample(null);
+            }else {
+                alleviations = alleviationMapper.selectByType("%"+alleviation.getType()+"%");
+            }
             PageInfo<Alleviation> pageInfo = new PageInfo<>(alleviations);
 
             DataVO<Alleviation> dataVO = new DataVO<>(pageInfo.getTotal(),alleviations,pageNum,pageSize);

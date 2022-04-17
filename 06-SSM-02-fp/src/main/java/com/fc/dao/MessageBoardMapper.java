@@ -24,7 +24,7 @@ public interface MessageBoardMapper {
 
     MessageBoardWithBLOBs selectByPrimaryKey(Long id);
 
-    MessageBoardWithBLOBs selectByUserId(@Param("userId") Long userId);
+    List<MessageBoardWithBLOBs> selectByUserName(@Param("username") String username);
 
     int updateByExampleSelective(@Param("record") MessageBoardWithBLOBs record, @Param("example") MessageBoardExample example);
 

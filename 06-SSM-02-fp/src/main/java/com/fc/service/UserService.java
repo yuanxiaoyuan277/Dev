@@ -10,5 +10,5 @@ public interface UserService{
 
     ResultVO update(UserWithBLOBs user);
 
-    ResultVO getList(Integer pageNum, Integer pageSize, Long id);
+    ResultVO getList(Integer pageNum, Integer pageSize,String info ,String search);
 }

@@ -59,15 +59,28 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize) {
-        List<VolunteerRecruitment> volunteerRecruitments;
+    public ResultVO getList(Integer pageNum, Integer pageSize,String info ,String types) {
+        List<VolunteerRecruitment> volunteerRecruitments = null;
         ResultVO resultVO;
-
         try {
-            PageHelper.startPage(pageNum,pageSize);
+            if (info.equals("")){
+                PageHelper.startPage(pageNum,pageSize);
 
-            volunteerRecruitments = volunteerRecruitmentMapper.selectByExample(null);
+                volunteerRecruitments = volunteerRecruitmentMapper.selectByExample(null);
+            }else {
+                System.out.println(info+"*************************************************");
+                if(types.equals("position")){
+                    volunteerRecruitments = volunteerRecruitmentMapper.selectByPosition("%"+info+"%");
+                }
+                if(types.equals("salary")){
+                    volunteerRecruitments = volunteerRecruitmentMapper.selectBySalary("%"+info+"%");
+                }
+                if(types.equals("lead")){
+                    volunteerRecruitments = volunteerRecruitmentMapper.selectByLead("%"+info+"%");
+                }
+            }
 
+            assert volunteerRecruitments != null;
             PageInfo<VolunteerRecruitment> pageInfo = new PageInfo<>(volunteerRecruitments);
 
             DataVO<VolunteerRecruitment> dataVO = new DataVO<>(pageInfo.getTotal(),volunteerRecruitments,pageNum,pageSize);

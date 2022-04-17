@@ -28,4 +28,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectByUserName(@Param("username")String username);
+
+    List<User> selectByName(@Param("name")String name);
 }

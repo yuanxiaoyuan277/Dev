@@ -37,4 +37,11 @@ public interface VolunteerRecruitmentMapper {
     int updateByPrimaryKey(VolunteerRecruitment record);
 
     Integer click(@Param(("id")) Long id,@Param("lastClickTime") Date lastClickTime);
+
+//    暂未写出SQL语句
+    List<VolunteerRecruitment> selectByPosition(@Param("position") String position);
+
+    List<VolunteerRecruitment> selectBySalary(@Param("salary")String salary);
+
+    List<VolunteerRecruitment> selectByLead(@Param("lead")String lead);
 }

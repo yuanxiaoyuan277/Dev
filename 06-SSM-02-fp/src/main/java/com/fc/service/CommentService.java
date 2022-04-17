@@ -10,5 +10,5 @@ public interface CommentService {
 
     ResultVO update(MessageBoardWithBLOBs messageBoards);
 
-    ResultVO getList(Integer pageNum, Integer pageSize, Long userId);
+    ResultVO getList(Integer pageNum, Integer pageSize, String username);
 }

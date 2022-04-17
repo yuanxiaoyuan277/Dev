@@ -11,7 +11,7 @@ public interface CarouselMapper {
 
     int deleteByExample(CarouselExample example);
 
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Carousel record);
 

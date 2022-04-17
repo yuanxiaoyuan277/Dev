@@ -13,6 +13,18 @@
     <mvc:cors>
         <mvc:mapping path="/**" allowed-origins="*"/>
     </mvc:cors>
+    <mvc:default-servlet-handler/>
+    <!--配置文件解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--上传文件的最大大小(字节)-->
+                <property name="maxUploadSize" value="500000000" />
+        <!--缓存-->
+        <property name="maxInMemorySize" value="4096" />
+        <!--默认的编码集-->
+        <property name="defaultEncoding" value="defaultEncoding"/>
+<!--        单个文件的最大大小(字节)-->
+        <property name="maxUploadSizePerFile" value="20000000"/>
+    </bean>
 
     <!--扫描指定路径下的所有注解-->
     <context:component-scan base-package="com.fc.controller"/>

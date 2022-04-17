@@ -36,9 +36,9 @@ public class CarouselServiceImpl implements CarouselService {
     }
 
     @Override
-    public ResultVO del(Long id) {
+    public ResultVO del(Integer id) {
+        System.out.println(id);
         int i = carouselMapper.deleteByPrimaryKey(id);
-
         ResultVO resultVO;
         if (i > 0){
             resultVO = new ResultVO(200, "OK", true, null);

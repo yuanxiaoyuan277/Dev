@@ -27,10 +27,11 @@ public class policy {
         return policyService.update(alleviation);
     }
 
-    @RequestMapping("getlist")
+    @RequestMapping("getList")
     public ResultVO getList(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum,
-                            @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize){
-        return policyService.getList(pageNum,pageSize);
+                            @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize,
+                            Alleviation alleviation){
+        return policyService.getList(pageNum,pageSize,alleviation);
     }
     @RequestMapping("click")
     public ResultVO click(@RequestBody Alleviation alleviation){

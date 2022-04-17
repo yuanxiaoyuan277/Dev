@@ -7,6 +7,33 @@
         last_click_time = #{lastClickTime}
     where id = #{id}
   </update>
+<!--根据职位查询-->
+  <select id="selectByPosition" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from volunteer_recruitment
+    where position like #{position}
+  </select>
+  <!--根据工资待遇查询-->
+  <select id="selectBySalary" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from volunteer_recruitment
+    where work_salary like #{salary}
+  </select>
+  <!--根据负责人查询-->
+  <select id="selectByLead" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from volunteer_recruitment
+    where lead like #{lead}
+  </select>
   <resultMap id="BaseResultMap" type="com.fc.entity.VolunteerRecruitment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -146,7 +173,7 @@
     insert into volunteer_recruitment (id, create_time, total, 
       position, work_salary, work_place, 
       work_time, recruits_num, recruits_time, 
-      recruits_end_time, lead, contact, 
+      recruits_end_time, `lead`, contact,
       picture, release_date, last_click_time, 
       click_num, work_require)
     values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{total,jdbcType=VARCHAR}, 
@@ -190,7 +217,7 @@
         recruits_end_time,
       </if>
       <if test="lead != null">
-        lead,
+        `lead`,
       </if>
       <if test="contact != null">
         contact,
@@ -342,7 +369,7 @@
       recruits_num = #{record.recruitsNum,jdbcType=INTEGER},
       recruits_time = #{record.recruitsTime,jdbcType=DATE},
       recruits_end_time = #{record.recruitsEndTime,jdbcType=DATE},
-      lead = #{record.lead,jdbcType=VARCHAR},
+      `lead` = #{record.lead,jdbcType=VARCHAR},
       contact = #{record.contact,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       release_date = #{record.releaseDate,jdbcType=DATE},
@@ -365,7 +392,7 @@
       recruits_num = #{record.recruitsNum,jdbcType=INTEGER},
       recruits_time = #{record.recruitsTime,jdbcType=DATE},
       recruits_end_time = #{record.recruitsEndTime,jdbcType=DATE},
-      lead = #{record.lead,jdbcType=VARCHAR},
+      `lead` = #{record.lead,jdbcType=VARCHAR},
       contact = #{record.contact,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       release_date = #{record.releaseDate,jdbcType=DATE},
@@ -440,7 +467,7 @@
       recruits_num = #{recruitsNum,jdbcType=INTEGER},
       recruits_time = #{recruitsTime,jdbcType=DATE},
       recruits_end_time = #{recruitsEndTime,jdbcType=DATE},
-      lead = #{lead,jdbcType=VARCHAR},
+      `lead` = #{lead,jdbcType=VARCHAR},
       contact = #{contact,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       release_date = #{releaseDate,jdbcType=DATE},
@@ -460,7 +487,7 @@
       recruits_num = #{recruitsNum,jdbcType=INTEGER},
       recruits_time = #{recruitsTime,jdbcType=DATE},
       recruits_end_time = #{recruitsEndTime,jdbcType=DATE},
-      lead = #{lead,jdbcType=VARCHAR},
+      `lead` = #{lead,jdbcType=VARCHAR},
       contact = #{contact,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       release_date = #{releaseDate,jdbcType=DATE},

@@ -40,4 +40,6 @@ public interface PoorMapper {
     Poor selectByUsername(@Param("name") String name);
 
     Integer click(@Param(("id")) Long id,@Param("lastClickTime") Date lastClickTime);
+
+    List<PoorWithBLOBs> selectBySn(@Param("sn") String sn);
 }

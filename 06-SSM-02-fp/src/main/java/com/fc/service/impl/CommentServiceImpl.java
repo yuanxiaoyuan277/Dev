@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -64,19 +64,16 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public ResultVO getList(Integer pageNum, Integer pageSize,Long userId) {
+    public ResultVO getList(Integer pageNum, Integer pageSize,String username) {
         List<MessageBoardWithBLOBs> messageBoards;
         ResultVO resultVO;
         try {
-            if (userId == null){
+            if (username.equals("")){
                 PageHelper.startPage(pageNum,pageSize);
 
                 messageBoards = messageBoardMapper.selectByExampleWithBLOBs(null);
             }else {
-                MessageBoardWithBLOBs messageBoardWithBLOBs = messageBoardMapper.selectByUserId(userId);
-                messageBoards = new ArrayList<>();
-                messageBoards.add(messageBoardWithBLOBs);
-
+                messageBoards = messageBoardMapper.selectByUserName("%"+username+"%");
             }
             PageInfo<MessageBoardWithBLOBs> pageInfo = new PageInfo<>(messageBoards);
 

@@ -1,10 +1,12 @@
 package com.fc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
     private Long id;
-
+    @JsonFormat(pattern = "yy年MM月dd日 hh:mm:ss")
     private Date createTime;
 
     private String username;

@@ -27,7 +27,7 @@ public class collect {
         return collectionService.update(collection);
     }
 
-    @RequestMapping("getlist")
+    @RequestMapping("getList")
     public ResultVO list(@RequestParam(value = "pageNo",required = false, defaultValue = "1")Integer pageNum
             ,@RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
             ,Long userid){

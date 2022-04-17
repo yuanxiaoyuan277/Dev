@@ -6,7 +6,7 @@ import com.fc.vo.ResultVO;
 public interface CarouselService {
     ResultVO add(Carousel carousel, Boolean is_carousel);
 
-    ResultVO del(Long id);
+    ResultVO del(Integer id);
 
     ResultVO update(Carousel carousel);
 

@@ -26,11 +26,11 @@ public class user {
             return userService.update(user);
     }
     //用户获取
-    @RequestMapping("getlist")
+    @RequestMapping("getList")
     public ResultVO list(@RequestParam(value = "pageNum",required = false, defaultValue = "1")Integer pageNum
                         , @RequestParam(value = "pageSize" ,required = false,defaultValue = "3")Integer pageSize
-                        , Long id){
-        return userService.getList(pageNum,pageSize,id);
+                        , String info ,String search){
+        return userService.getList(pageNum,pageSize,info,search);
     }
     //用户添加
     @RequestMapping("add")

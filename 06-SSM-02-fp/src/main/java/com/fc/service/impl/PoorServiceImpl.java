@@ -1,7 +1,6 @@
 package com.fc.service.impl;
 
 import com.fc.dao.PoorMapper;
-import com.fc.entity.Poor;
 import com.fc.entity.PoorWithBLOBs;
 import com.fc.service.PoorService;
 import com.fc.vo.DataVO;
@@ -11,12 +10,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class PoorServiceImpl implements PoorService {
+public class PoorServiceImpl extends PageHelper implements PoorService {
     @Autowired
     private PoorMapper poorMapper;
 
@@ -51,8 +49,8 @@ public class PoorServiceImpl implements PoorService {
     @Override
     public ResultVO update(PoorWithBLOBs poorWithBLOBs) {
         ResultVO resultVO;
-        int i = poorMapper.updateByPrimaryKeySelective(poorWithBLOBs);
-
+        int i = poorMapper.updateByPrimaryKeyWithBLOBs(poorWithBLOBs);
+        System.out.println("i:"+i);
         if (i > 0){
             PoorWithBLOBs result = poorMapper.selectByPrimaryKey(poorWithBLOBs.getId());
 
@@ -66,22 +64,21 @@ public class PoorServiceImpl implements PoorService {
 
     @Override
     public ResultVO getList(Integer pageNum, Integer pageSize,PoorWithBLOBs poorWithBLOBs) {
-        List<PoorWithBLOBs> poor;
+        List<PoorWithBLOBs> poors;
         ResultVO resultVO;
         try {
-            if (poorWithBLOBs.getId() == null){
+            if (poorWithBLOBs.getSn().equals("")){
                 PageHelper.startPage(pageNum,pageSize);
 
-                poor = poorMapper.selectByExampleWithBLOBs(null);
-            }else {
-                Poor poor1 = poorMapper.selectByPrimaryKey(poorWithBLOBs.getId());
-                poor = new ArrayList<>();
-                poor.add(poorWithBLOBs);
-                poor1.setClickNum(poor1.getClickNum()+1);
-            }
-            PageInfo<PoorWithBLOBs> pageInfo = new PageInfo<>(poor);
+                poors = poorMapper.selectByExampleWithBLOBs(null);
 
-            DataVO<PoorWithBLOBs> dataVO = new DataVO<>(pageInfo.getTotal(),poor,pageNum,pageSize);
+            }else {
+                poors = poorMapper.selectBySn("%"+poorWithBLOBs.getSn()+"%");
+
+            }
+            PageInfo<PoorWithBLOBs> pageInfo = new PageInfo<>(poors);
+
+            DataVO<PoorWithBLOBs> dataVO = new DataVO<>(pageInfo.getTotal(),poors,pageNum,pageSize);
 
             resultVO = new ResultVO(200,"OK",true,dataVO);
 

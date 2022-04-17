@@ -12,7 +12,7 @@ public interface PolicyService {
 
     ResultVO update(Alleviation alleviation);
 
-    ResultVO getList(Integer pageNum, Integer pageSize);
+    ResultVO getList(Integer pageNum, Integer pageSize,Alleviation alleviation);
 
     ResultVO click(Long id, Date lastClickTime);
 }

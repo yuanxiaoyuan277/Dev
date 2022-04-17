@@ -75,7 +75,7 @@
     id, create_time, user_id, username, picture, reply_picture
   </sql>
   <sql id="Blob_Column_List">
-    content, reply
+    `content`, `reply`
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.MessageBoardExample" resultMap="ResultMapWithBLOBs">
     select
@@ -123,6 +123,14 @@
     from message_board
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
+  <!--根据用户名查询-->
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message_board where username like #{username}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from message_board
     where id = #{id,jdbcType=BIGINT}
@@ -163,7 +171,7 @@
         reply_picture,
       </if>
       <if test="content != null">
-        content,
+        `content`,
       </if>
       <if test="reply != null">
         reply,

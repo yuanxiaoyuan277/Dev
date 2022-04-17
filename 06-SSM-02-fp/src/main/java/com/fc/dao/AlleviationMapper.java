@@ -37,4 +37,6 @@ public interface AlleviationMapper {
     int updateByPrimaryKey(Alleviation record);
 
     Integer click(Long id, Date lastClickTime);
+
+    List<Alleviation> selectByType(@Param("type") String type);
 }

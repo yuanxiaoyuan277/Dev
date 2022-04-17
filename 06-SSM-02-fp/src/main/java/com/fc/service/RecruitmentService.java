@@ -12,7 +12,7 @@ public interface RecruitmentService {
 
     ResultVO update(VolunteerRecruitment volunteerRecruitment);
 
-    ResultVO getList(Integer pageNum, Integer pageSize);
+    ResultVO getList(Integer pageNum, Integer pageSize,String info ,String types);
 
     ResultVO click(Long id, Date lastClickTime);
 }

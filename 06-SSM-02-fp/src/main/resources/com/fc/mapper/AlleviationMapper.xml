@@ -7,6 +7,15 @@
             last_click_time = #{lastClickTime}
         where id = #{id}
   </update>
+<!--根据type查询-->
+  <select id="selectByType" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alleviation
+    where type like #{type}
+  </select>
   <resultMap id="BaseResultMap" type="com.fc.entity.Alleviation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -82,7 +91,7 @@
     id, create_time, title, type, release_time, cover, last_click_time, click_num
   </sql>
   <sql id="Blob_Column_List">
-    content
+    `content`
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.AlleviationExample" resultMap="ResultMapWithBLOBs">
     select
