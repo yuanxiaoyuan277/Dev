@@ -1,0 +1,21 @@
+server:
+  port: 8848
+  servlet:
+    context-path: /yml
+
+
+student:
+  name: "一羊\n千洗"
+  age: 22
+  gender: '男'
+  married: false
+  brithday: 2000/11/28/ 10:00:01
+  hobby: ["唱","跳","rap","篮球"]
+  food:
+    - 一份惆怅
+    - 一份凄凉
+    - 双汇火腿
+  score: {"Java": 100, "MySQL": 10}
+  car:
+    name: BYD·张
+    color: 白色

@@ -5,10 +5,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>云R记</title>
-    <link href="statics/css/login.css" rel="stylesheet" type="text/css" />
-    <script src="statics/js/jquery-1.11.3.js" type=text/javascript></script>
-    <script src="statics/js/util.js" type=text/javascript></script>
-    <script src="statics/js/config.js" type=text/javascript></script>
+    <link href="/statics/css/login.css" rel="stylesheet" type="text/css" />
+    <script src="/statics/js/jquery-1.11.3.js" type=text/javascript></script>
+    <script src="/statics/js/util.js" type=text/javascript></script>
+    <script src="/statics/js/config.js" type=text/javascript></script>
 </head>
 <body>
 <!--head-->
@@ -39,8 +39,8 @@
 
 <div id="flash">
     <div class="pos">
-        <a bgUrl="statics/images/banner-bg1.jpg" id="flash1" style="display:block;"><img src="statics/images/banner_pic1.png"></a>
-        <a bgUrl="statics/images/banner-bg2.jpg" id="flash2"                       ><img src="statics/images/banner-pic2.jpg"></a>
+        <a bgUrl="/statics/images/banner-bg1.jpg" id="flash1" style="display:block;"><img src="/statics/images/banner_pic1.png"></a>
+        <a bgUrl="/statics/images/banner-bg2.jpg" id="flash2"                       ><img src="/statics/images/banner-pic2.jpg"></a>
     </div>
     <div class="flash_bar">
         <div class="dq" id="f1" onclick="changeflash(1)"></div>

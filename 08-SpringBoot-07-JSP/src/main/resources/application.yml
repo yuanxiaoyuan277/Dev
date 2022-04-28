@@ -1,0 +1,40 @@
+spring:
+  mvc:
+    view:
+      #配置视图解析器的前缀和后缀
+      prefix: /
+      suffix: .jsp
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
+    username: root
+    password: 123456
+
+mybatis:
+  #扫描指定路径下的映射文件（SQL）
+  mapper-locations: classpath:com/fc/mapper/*.xml
+  configuration:
+    #加sql执行日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #主键回填
+    use-generated-keys: true
+    #二级缓存村
+    cache-enabled: true
+    #懒加载
+    lazy-loading-enabled: true
+    #驼峰映射
+    map-underscore-to-camel-case: true
+    #积极加载
+    aggressive-lazy-loading: true
+    #别名所在包
+  type-aliases-package: com.fc.entity
+
+pagehelper:
+  #分页参数合理化
+  reasonable: true
+  #配置数据库方言
+#  dialect: 'mysql'
+
+
+
